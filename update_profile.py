@@ -85,14 +85,17 @@ LANG_PUNCHLINE = "(Ruby is not invited)"
 
 
 def top_languages(nodes, limit=4):
-    totals = {}
+    # rank by how many repos have each language as their primary one
+    freq = {}
     for n in nodes:
-        for e in (n.get("languages", {}).get("edges") or []):
-            name = e["node"]["name"]
-            if name in LANG_BLOCKLIST:
-                continue
-            totals[name] = totals.get(name, 0) + e["size"]
-    ranked = sorted(totals, key=totals.get, reverse=True)
+        pl = n.get("primaryLanguage")
+        if not pl:
+            continue
+        name = pl["name"]
+        if name in LANG_BLOCKLIST:
+            continue
+        freq[name] = freq.get(name, 0) + 1
+    ranked = sorted(freq, key=freq.get, reverse=True)
     # Go is always pinned first; fill the rest from detected languages
     ordered = ["Go"] + [l for l in ranked if l != "Go"]
     return f"{', '.join(ordered[:limit])} {LANG_PUNCHLINE}"
@@ -116,28 +119,34 @@ def fetch_stats():
         followers {{ totalCount }}
         repositories(first: 100, ownerAffiliations: OWNER) {{
           totalCount
-          nodes {{
-            name stargazerCount isFork
-            languages(first: 10, orderBy: {{field: SIZE, direction: DESC}}) {{
-              edges {{ size node {{ name }} }}
-            }}
-          }}
+          nodes {{ nameWithOwner stargazerCount isFork primaryLanguage {{ name }} }}
         }}
-        repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, PULL_REQUEST, REPOSITORY]) {{
+        repositoriesContributedTo(first: 100, includeUserRepositories: true,
+            contributionTypes: [COMMIT, PULL_REQUEST, REPOSITORY]) {{
           totalCount
+          nodes {{ nameWithOwner isFork primaryLanguage {{ name }} }}
         }}
       }}
     }}""", token=PRIV_TOKEN)["user"]
-    nodes = u["repositories"]["nodes"]
+    owned = u["repositories"]["nodes"]
+    contributed = u["repositoriesContributedTo"]["nodes"]
+    # LOC + languages span everything you touch (owned + org repos via kueski-dev),
+    # deduped by owner/name; commit walk is author-filtered so only your lines count
+    repos = {}
+    for n in owned + contributed:
+        if n["isFork"]:
+            continue
+        owner, name = n["nameWithOwner"].split("/", 1)
+        repos[n["nameWithOwner"]] = (owner, name)
     stats = {
         "followers": u["followers"]["totalCount"],
         "repos": u["repositories"]["totalCount"],
         "contributed": u["repositoriesContributedTo"]["totalCount"],
-        "stars": sum(n["stargazerCount"] for n in nodes),
+        "stars": sum(n["stargazerCount"] for n in owned),
         "commits": commits,
-        "languages": top_languages(nodes),
+        "languages": top_languages(owned + contributed),
     }
-    stats.update(loc([n["name"] for n in nodes if not n["isFork"]], u["id"]))
+    stats.update(loc(list(repos.values()), u["id"]))
     return stats
 
 
@@ -154,15 +163,15 @@ query($owner: String!, $name: String!, $id: ID!, $cursor: String) {
 }"""
 
 
-def loc(repo_names, user_id):
+def loc(repos, user_id):
     # REST stats/contributors answers 202 forever to the Actions token,
     # so walk own commits on the default branch via GraphQL instead
     add = rem = 0
-    for name in repo_names:
+    for owner, name in repos:
         cursor = None
         try:
             while True:
-                ref = graphql(LOC_QUERY, {"owner": USER, "name": name, "id": user_id, "cursor": cursor}, token=PRIV_TOKEN)["repository"]["defaultBranchRef"]
+                ref = graphql(LOC_QUERY, {"owner": owner, "name": name, "id": user_id, "cursor": cursor}, token=PRIV_TOKEN)["repository"]["defaultBranchRef"]
                 if ref is None:
                     break  # empty repo
                 h = ref["target"]["history"]
