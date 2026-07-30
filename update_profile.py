@@ -226,6 +226,7 @@ def info_lines(s):
         rule("Contact"),
         kv("Email", "adnvilla@gmail.com"),
         kv("LinkedIn", "in/adrian-villafana"),
+        kv("Blog", "adrianvillafana.com"),
         [],
         rule("GitHub Stats"),
         kv2("Repos", f"{s['repos']} {{Contributed: {s['contributed']}}}", "Stars", n(s["stars"])),
