@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # PAT is required: this repo rejects the default GITHUB_TOKEN push
+          # ("fatal error in commit_refs"). Falls back to GITHUB_TOKEN if unset.
+          token: ${{ secrets.ACCESS_TOKEN || github.token }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
