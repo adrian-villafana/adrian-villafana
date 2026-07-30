@@ -216,7 +216,7 @@ def info_lines(s):
         [],
         kv("OS", "macOS, Linux"),
         kv("Uptime", f"{y} years, {m} months, {d} days"),
-        kv("Host", "Kueski (payroll, not a loan)"),
+        kv("Host", "Kueski (FTE, not a contractor)"),
         kv("Kernel", "Software Engineer (Go or go home)"),
         kv("IDE", "Claude Code, Cursor, Codex (sometimes I code too)"),
         [],
