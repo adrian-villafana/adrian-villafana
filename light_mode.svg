@@ -29,7 +29,7 @@
 <text x="25" y="430" fill="#57606a" xml:space="preserve">..:..::..:..................   ....:..</text>
 <text x="390" y="45" xml:space="preserve"><tspan fill="#0969da">adrian-villafana@github </tspan><tspan fill="#afb8c1">────────────────────────────────</tspan></text>
 <text x="390" y="87" xml:space="preserve"><tspan fill="#953800">OS: </tspan><tspan fill="#afb8c1">....................................... </tspan><tspan fill="#24292f">macOS, Linux</tspan></text>
-<text x="390" y="108" xml:space="preserve"><tspan fill="#953800">Uptime: </tspan><tspan fill="#afb8c1">.................... </tspan><tspan fill="#24292f">38 years, 2 months, 24 days</tspan></text>
+<text x="390" y="108" xml:space="preserve"><tspan fill="#953800">Uptime: </tspan><tspan fill="#afb8c1">.................... </tspan><tspan fill="#24292f">38 years, 2 months, 25 days</tspan></text>
 <text x="390" y="129" xml:space="preserve"><tspan fill="#953800">Host: </tspan><tspan fill="#afb8c1">................... </tspan><tspan fill="#24292f">Kueski (FTE, not a contractor)</tspan></text>
 <text x="390" y="150" xml:space="preserve"><tspan fill="#953800">Kernel: </tspan><tspan fill="#afb8c1">.............. </tspan><tspan fill="#24292f">Software Engineer (Go or go home)</tspan></text>
 <text x="390" y="171" xml:space="preserve"><tspan fill="#953800">IDE: </tspan><tspan fill="#afb8c1">. </tspan><tspan fill="#24292f">Claude Code, Cursor, Codex (sometimes I code too)</tspan></text>
@@ -41,6 +41,6 @@
 <text x="390" y="339" xml:space="preserve"><tspan fill="#953800">Blog: </tspan><tspan fill="#afb8c1">.............................. </tspan><tspan fill="#24292f">adrianvillafana.com</tspan></text>
 <text x="390" y="381" xml:space="preserve"><tspan fill="#0969da">─ GitHub Stats </tspan><tspan fill="#afb8c1">─────────────────────────────────────────</tspan></text>
 <text x="390" y="402" xml:space="preserve"><tspan fill="#953800">Repos: </tspan><tspan fill="#afb8c1">... </tspan><tspan fill="#24292f">1 {Contributed: 50}</tspan><tspan fill="#afb8c1"> | </tspan><tspan fill="#953800">Stars: </tspan><tspan fill="#afb8c1">.............. </tspan><tspan fill="#24292f">0</tspan></text>
-<text x="390" y="423" xml:space="preserve"><tspan fill="#953800">Commits: </tspan><tspan fill="#afb8c1">............... </tspan><tspan fill="#24292f">3,206</tspan><tspan fill="#afb8c1"> | </tspan><tspan fill="#953800">Followers: </tspan><tspan fill="#afb8c1">.......... </tspan><tspan fill="#24292f">0</tspan></text>
-<text x="390" y="444" xml:space="preserve"><tspan fill="#953800">Lines of Code: </tspan><tspan fill="#24292f">213,996</tspan><tspan fill="#afb8c1"> ( </tspan><tspan fill="#1a7f37">332,856++</tspan><tspan fill="#afb8c1">, </tspan><tspan fill="#cf222e">118,860--</tspan><tspan fill="#afb8c1"> )</tspan></text>
+<text x="390" y="423" xml:space="preserve"><tspan fill="#953800">Commits: </tspan><tspan fill="#afb8c1">............... </tspan><tspan fill="#24292f">3,213</tspan><tspan fill="#afb8c1"> | </tspan><tspan fill="#953800">Followers: </tspan><tspan fill="#afb8c1">.......... </tspan><tspan fill="#24292f">0</tspan></text>
+<text x="390" y="444" xml:space="preserve"><tspan fill="#953800">Lines of Code: </tspan><tspan fill="#24292f">214,694</tspan><tspan fill="#afb8c1"> ( </tspan><tspan fill="#1a7f37">333,729++</tspan><tspan fill="#afb8c1">, </tspan><tspan fill="#cf222e">119,035--</tspan><tspan fill="#afb8c1"> )</tspan></text>
 </svg>
